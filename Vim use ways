@@ -1,0 +1,21 @@
+[root@www ~]# cd /tmp/vitest 
+[root@www vitest]# vim man.config 
+[root@www vitest]# ls -al total 48 
+drwxr-xr-x 2 root root 4096 Jan 12 14:48 . 
+drwxrwxrwt 7 root root 4096 Jan 12 13:26 .. 
+-rw-r--r-- 1 root root 4101 Jan 12 13:55 man.config 
+-rw-r--r-- 1 root root 4096 Jan 12 14:48 .man.config.swp  
+-rw-r--r-- 1 root root 4101 Jan 12 13:43 
+man.test.config 
+[root@www vitest]# kill -9 %1
+[root@www vitest]# ls -al .man.config.swp 
+-rw-r--r-- 1 root root 4096 Jan 12 14:48 .man.config.swp
+[root@www vitest]# vim man.config 
+E325: ATTENTION  
+Found a swap file by the name ".man.config.swp"
+owned by: root   dated: Mon Jan 12 14:48:24 2009 
+file name: /tmp/vitest/man.config 
+modified: no  user name: root   host name: www.vbird.tsai 
+process ID: 11539 
+While opening file "man.config" 
+dated: Mon Jan 12 13:55:07 2014
