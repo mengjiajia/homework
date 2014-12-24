@@ -1,0 +1,37 @@
+#include <reg51.h>
+#include <adsacc.h>
+#define uchar unsigned char
+#define uint unsigned int
+void delay(uint);
+void dispiay(void);
+uchar disbuffer[8]={0,1,2,3,4,5,6,7};
+void main(void)
+{
+  XBYTE[0x7f03]=0x80;
+  while(1)
+  {
+    display();
+  }
+}
+void delay(uint i)
+{
+  uint j;
+  for (j=0;j<i;j++)
+}
+void display(void)
+{
+  uchar codevalue[16]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+  0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
+  uchar chocode[8]=
+  {0xfe,0xfd,0xfb,0xf7,0xef,0xdf,0xbf,0x7f};
+  uchar i,p,temp;
+  for (i=0;i<8;i++)
+  {
+  temp=chocode[i];
+  XBYTE[0x7f01]=temp;
+  p=disbuffer[i];
+  temp=codevalue[p];
+  XBYTE[0x7f00]=temp;
+  delay(20);
+  }
+  }
