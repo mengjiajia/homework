@@ -1,0 +1,22 @@
+#include <reg51.h>
+sbit P1_1=P1^1;
+sbit P3_5=p3^5;
+void main()
+{
+  TMOD=0x61;
+  TH0=0xD8;TL0=0xf0;
+  TH1=0xE7;TL1=0xE7;
+  EA=1;
+  ET0=1;ET1=1;
+  TR0=1;TR1=1;
+  while(1);
+  }
+  void time()_int(void) interrupt 1
+  {
+   TH0=0xD8;TL0=0xf0;
+   p3_5=!P3_5;
+   }
+   void time()_int(void) interrupt 3
+   {
+   P1_1=!P1_1;
+   }
