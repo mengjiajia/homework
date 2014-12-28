@@ -1,0 +1,48 @@
+#include <stdio.h> 
+char *menu[] = 
+{ 
+       "a - add new record
+       "d - delete record", 
+       "q - quit", 
+NULL 
+ }; 
+int getchoice(char *choices[])
+{
+int chosen = 0; 
+int selected; 
+char **option; 
+do { 
+    option = choices; 
+    while(*option)
+{ 
+ printf("%s\n", *option); 
+option++; 
+} 
+selected = getchar(); 
+ option = choices; 
+while(*option){ 
+if(option[0] == selected)
+{
+ chosen = 1; break; 
+} 
+option++;
+} 
+if(!chosen)
+{ 
+printf("Incorrect choice, select again.\n"); 
+ } 
+ }
+ while(!chosen); 
+return selected; 
+} 
+int main() 
+{ 
+int choice = 0; 
+do
+{ 
+choice = getchoice(menu); 
+printf("You choose %c\n", choice); 
+} 
+while('q' != choice); 
+exit(0); 
+} 
