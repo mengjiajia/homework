@@ -1,0 +1,29 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <curses.h>
+int main()
+{
+        WINDOW *new_window;
+        int x,y;
+        char letter = 'a';
+        initscr();
+        for(y=0;y<LINES-1;y++)
+                for(x=0;x<COLS-1;x++){
+                     mvwaddch(stdscr, y, x, letter);
+                        if(++letter > 'z')
+                                letter = 'a';
+                }
+        refresh();
+        sleep(2);
+        new_window = newwin(10,20,5,5);
+        box(new_window, '|', '-');
+        mvwprintw(new_window, 2, 2, "%s", "Hello World");
+        wrefresh(new_window);
+        sleep(2);
+        mvwin(new_window, 10, 10);
+        wrefresh(new_window);
+        sleep(2);
+        delwin(new_window);
+        endwin();
+        return 0;
+}
