@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>#include <sys/stat.h>
+#define RWRR (S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)
+#define BUFFSIZE 4096
+int
+main (int argc, char *argv[])
+{
+   int fd; 
+   int n;
+   char buff[] = "Hello! I'm writing to this file.";
+   char    buf[BUFFSIZE];
+   umask(0);
+   /*open--create*/ 
+   if((fd = open("hello.c", O_RDWR | O_CREAT | O_TRUNC, RWRR)) < 0){
+    printf("ERROR:create file fail!!\n"); 
+    exit(0); 
+    } 
+    printf("open hello.c and file descriptor is %d\n", fd);
+    /*so if file doesn't exist, create a file with size 0*/
+   /*write*/
+   if (write(fd, buff, 32) != 32){ 
+    printf("ERROR:write fail!!\n");
+    exit(0); 
+     } 
+    printf("write: Hello! I'm writing to this file. in file hello.c\n");
+   /*write sth. to hello.c*/
+   /*seek file*/ 
+   if ((n = lseek(fd, 0, SEEK_SET)) == -1){ 
+    printf("ERROR:seek error!\n");  exit(0); }
+    //printf("To the file porsition: %d \n",n);
+    /*read from start*/ 
+    if(read(fd, buf, 15) == -1){
+     printf("ERROR:read error!\n"); 
+    exit(0);
+     } 
+    buf[sizeof(buf)+1]='\0'; 
+    printf("read from file: %s \n", buf);
+    /*close file*/
+    close(fd);
+    printf("close hello.c");
+    exit(0);
+    }
