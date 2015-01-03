@@ -1,0 +1,35 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include "deck.h"
+static time_t seed = 0;
+void shuffle(deck_t *pdeck)
+{
+  /* Keeps track of what numbers have been used */
+  int drawn[DECKSIZE] = {0};
+  int i;
+  /* One time initialization of rand */
+  if(0 == seed)
+  {
+    seed = time(NULL);
+    srand(seed);
+  }
+  for(i = 0; i < DECKSIZE; i++)
+  {
+    int value = -1;
+    do
+    {
+      value = rand() % DECKSIZE;
+    }
+    while(drawn[value] != 0);
+
+    /* mark value as used */
+    drawn[value] = 1;
+
+    /* debug statement */
+    printf("%i\n", value);
+    pdeck->card[i] = value;
+  }
+  pdeck->dealt = 0;
+  return;
+}
